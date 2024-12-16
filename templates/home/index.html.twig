@@ -4,13 +4,49 @@
 
 {% block body %}
 <style>
-    
-    
+    body {
+        background-color: white !important; /* Fondo blanco */
+        color: black; /* Color de texto por defecto */
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    .section {
+        padding: 20px; /* Espaciado interno para cada sección */
+        text-align: center;
+    }
+
+    .section:nth-child(1) {
+        background-color: white;
+    }
+
+    .section:nth-child(2) {
+        background-color: #f8f9fa; /* Gris claro */
+    }
+
+    .section:nth-child(3) {
+        background-color: white;
+    }
+
+    .section:nth-child(4) {
+        background-color: #f8f9fa; /* Gris claro */
+    }
 </style>
 
-<div class="container text-center">
-    <h2>Sobre nosotros</h2>
-    
-    
+<div class="container">
+    <div id="sobre-nosotros" class="section">
+        <h2>Sobre nosotros</h2>
+        
+    </div>
+    <div id="propiedades-venta" class="section">
+        <h2>Propiedades en venta</h2>
+    </div>
+    <div id="propiedades-alquiler" class="section">
+        <h2>Propiedades en alquiler</h2>
+    </div>
+    <div id="propiedades-vacacional" class="section">
+        <h2>Propiedades en alquiler vacacional</h2>
+    </div>
 </div>
 {% endblock %}
+

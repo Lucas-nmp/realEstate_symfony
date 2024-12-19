@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PropertyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,6 +42,17 @@ class Property
 
     #[ORM\Column(length: 60)]
     private ?string $priceObservation = null;
+
+    /**
+     * @var Collection<int, FeatureProperty>
+     */
+    #[ORM\OneToMany(targetEntity: FeatureProperty::class, mappedBy: 'property', orphanRemoval: true)]
+    private Collection $featureProperties;
+
+    public function __construct()
+    {
+        $this->featureProperties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +163,36 @@ class Property
     public function setPriceObservation(string $priceObservation): static
     {
         $this->priceObservation = $priceObservation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeatureProperty>
+     */
+    public function getFeatureProperties(): Collection
+    {
+        return $this->featureProperties;
+    }
+
+    public function addFeatureProperty(FeatureProperty $featureProperty): static
+    {
+        if (!$this->featureProperties->contains($featureProperty)) {
+            $this->featureProperties->add($featureProperty);
+            $featureProperty->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeatureProperty(FeatureProperty $featureProperty): static
+    {
+        if ($this->featureProperties->removeElement($featureProperty)) {
+            // set the owning side to null (unless already changed)
+            if ($featureProperty->getProperty() === $this) {
+                $featureProperty->setProperty(null);
+            }
+        }
 
         return $this;
     }

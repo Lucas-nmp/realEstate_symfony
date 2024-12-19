@@ -49,9 +49,16 @@ class Property
     #[ORM\OneToMany(targetEntity: FeatureProperty::class, mappedBy: 'property', orphanRemoval: true)]
     private Collection $featureProperties;
 
+    /**
+     * @var Collection<int, FeatureBuilding>
+     */
+    #[ORM\OneToMany(targetEntity: FeatureBuilding::class, mappedBy: 'property', orphanRemoval: true)]
+    private Collection $featureBuildings;
+
     public function __construct()
     {
         $this->featureProperties = new ArrayCollection();
+        $this->featureBuildings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,6 +198,36 @@ class Property
             // set the owning side to null (unless already changed)
             if ($featureProperty->getProperty() === $this) {
                 $featureProperty->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeatureBuilding>
+     */
+    public function getFeatureBuildings(): Collection
+    {
+        return $this->featureBuildings;
+    }
+
+    public function addFeatureBuilding(FeatureBuilding $featureBuilding): static
+    {
+        if (!$this->featureBuildings->contains($featureBuilding)) {
+            $this->featureBuildings->add($featureBuilding);
+            $featureBuilding->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeatureBuilding(FeatureBuilding $featureBuilding): static
+    {
+        if ($this->featureBuildings->removeElement($featureBuilding)) {
+            // set the owning side to null (unless already changed)
+            if ($featureBuilding->getProperty() === $this) {
+                $featureBuilding->setProperty(null);
             }
         }
 

@@ -12,6 +12,10 @@
     </div>
     <div id="propiedades-venta" class="section">
         <h2>Propiedades en venta</h2>
+        {% for property in properties %}
+            <p> {{ property.title }} </p>
+        {% endfor %}    
+
     </div>
     <div id="propiedades-alquiler" class="section">
         <h2>Propiedades en alquiler</h2>

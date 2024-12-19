@@ -4,7 +4,7 @@ body {
 
 body {
     background-color: white !important; /* Fondo blanco */
-    color: black; /* Color de texto por defecto */
+    color: rgb(17, 230, 31); /* Color de texto por defecto */
 }
 html {
     scroll-behavior: smooth;

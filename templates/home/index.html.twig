@@ -6,23 +6,215 @@
 
 
 <div class="container">
-    <div id="sobre-nosotros" class="section">
-        <h2>Sobre nosotros</h2>
-        
-    </div>
-    <div id="propiedades-venta" class="section">
-        <h2>Propiedades en venta</h2>
-        {% for property in properties %}
+    <!-- DESTACADOS SLIDER -->
+    <div id="destacados" class"section">
+        <h2>Destacados</h2>
+        {% for property in outstandingProperties %}
             <p> {{ property.title }} </p>
         {% endfor %}    
-
     </div>
+    <!-- FIN DESTACADOS SLIDER -->
+    <hr>
+
+    <!-- SOBRE NOSOTROS -->
+    <div id="sobre-nosotros" class="section">
+        <h2>Sobre nosotros</h2>
+        <div class="products-container">
+            
+                <div class="product-carousel">
+                    <h4>Explora</h4>
+                    <div class="carousel-container">
+                        <div class="">
+                            <p>Encuentra la Casa de tus Sueños en la Costa del Sol con Alejandra Home. Nos dedicamos a hacer realidad el sueño de tener un hogar en la hermosa Costa del Sol. Nuestro equipo se esfuerza por ofrecer un servicio excepcional, combinando un trato personalizado y profesional para cada cliente.</p>
+                        </div>  
+                    </div>
+                </div>
+
+                <div class="product-carousel">
+                    <h4>Experiencia</h4>
+                    <div class="carousel-container">
+                        <div class="">
+                            <p>Nuestra Promesa de Servicio Personalizado y Profesional. En Alejandra Home, entendemos que la compra de una propiedad es más que una transacción, es una experiencia de vida. Por eso, nos comprometemos a brindar un servicio excepcional, con atención personalizada y profesional en cada paso del camino.</p>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="product-carousel">
+                    <h4>Facilidad</h4>
+                    <div class="carousel-container">
+                        <div class="">
+                            <p>Trámites Simplificados para tu Comodidad Inmobiliaria. En Alejandra Home, nos encargamos de mucho más que solo la compra de tu propiedad. Gestionamos todos los trámites necesarios antes y después de la transacción, incluyendo verificación de cargas, tributos, comunidades, suministros, hipotecas y tramitación de escrituras, para que puedas disfrutar de tu nuevo hogar sin preocupaciones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-carousel">
+                    <h4>Diversidad</h4>
+                    <div class="carousel-container">
+                        <div class="">
+                            <p>Tu Sitio Inmobiliario Multilingüe. En Alejandra Home, nos enorgullece ofrecer nuestros servicios en varios idiomas. Ya seas español, inglés, francés o ruso, nuestro equipo está aquí para ayudarte a encontrar la propiedad perfecta y facilitar el proceso de compra con fluidez y claridad en el idioma que prefieras.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-carousel">
+                    <h4>Confianza</h4>
+                    <div class="carousel-container">
+                        <div class="">
+                            <p>Descubre Opciones Variadas y Seguras. En Alejandra Home, trabajamos tanto con productos bancarios como con propiedades particulares, brindándote una amplia gama de opciones confiables para elegir. Puedes contar con nosotros para encontrar la mejor opción que se adapte a tus necesidades y preferencias, con total transparencia y confianza.</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- FIN SOBRE NOSOTROS -->
+
+    <hr>
+    
+    <!-- PROPIEDADES EN VENTA -->
+    <div id="propiedades-venta" class="section">
+        <h2>Propiedades en venta</h2>
+        <div class="products-container">
+            {% for property in saleproperties %}
+                {% set imageDir = 'uploads/' ~ property.reference %}
+                {% set images = [] %}
+
+                {# Renderizar cada propiedad #}
+                <div class="product-carousel">
+                    <h4>{{ property.title }}</h4>
+                    <div class="carousel-container">
+                        <div class="operation">
+                            <p> {{ property.operationType}} </p>
+                        </div>
+                        <div class="main-image-container">
+                            {% if images|length > 0 %}
+                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            {% else %}
+                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                            {% endif %}
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="prev-btn"><</button>
+                            <button class="next-btn">></button>
+                        </div>
+                        <div class="thumbnails-container">
+                            {% for image in images %}
+                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
+                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p>{{ property.shortdescription }}</p>
+                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
+                        <hr>
+                        <p>{{ property.area }}</p>
+
+                    </div>    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- FIN PROPIEDADES EN VENTA -->
+    
+    <hr>
+
+    <!-- PROPIEDADES EN ALQUILER -->
     <div id="propiedades-alquiler" class="section">
         <h2>Propiedades en alquiler</h2>
+        <div class="products-container">
+            {% for property in rentproperties %}
+                {% set imageDir = 'uploads/' ~ property.reference %}
+                {% set images = [] %}
+
+                {# Renderizar cada propiedad #}
+                <div class="product-carousel">
+                    <h4>{{ property.title }}</h4>
+                    <div class="carousel-container">
+                        <div class="operation">
+                            <p> {{ property.operationType}} </p>
+                        </div>
+                        <div class="main-image-container">
+                            {% if images|length > 0 %}
+                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            {% else %}
+                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                            {% endif %}
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="prev-btn"><</button>
+                            <button class="next-btn">></button>
+                        </div>
+                        <div class="thumbnails-container">
+                            {% for image in images %}
+                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
+                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p>{{ property.shortdescription }}</p>
+                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
+                        <hr>
+                        <p>{{ property.area }}</p>
+
+                    </div>    
+                </div>
+            {% endfor %}
+        </div>   
     </div>
+    <!-- FIN PROPIEDADES EN ALQUILER -->
+
+    <hr>
+
+    <!-- PROPIEDADES EN ALQUILER VACACIONAL -->
     <div id="propiedades-vacacional" class="section">
         <h2>Propiedades en alquiler vacacional</h2>
+        <div class="products-container">
+            {% for property in vacationalproperties %}
+                {% set imageDir = 'uploads/' ~ property.reference %}
+                {% set images = [] %}
+
+                {# Renderizar cada propiedad #}
+                <div class="product-carousel">
+                    <h4>{{ property.title }}</h4>
+                    <div class="carousel-container">
+                        <div class="operation">
+                            <p> {{ property.operationType}} </p>
+                        </div>
+                        <div class="main-image-container">
+                            {% if images|length > 0 %}
+                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            {% else %}
+                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                            {% endif %}
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="prev-btn"><</button>
+                            <button class="next-btn">></button>
+                        </div>
+                        <div class="thumbnails-container">
+                            {% for image in images %}
+                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
+                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p>{{ property.shortdescription }}</p>
+                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
+                        <hr>
+                        <p>{{ property.area }}</p>
+
+                    </div>    
+                </div>
+            {% endfor %}
+        </div>
     </div>
+    <!-- FIN PROPIEDADES EN ALQUILER VACACIONAL -->
+
 </div>
 {% endblock %}
+
+
 

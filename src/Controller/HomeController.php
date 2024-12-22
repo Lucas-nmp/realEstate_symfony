@@ -19,8 +19,33 @@ class HomeController extends AbstractController
         //$users = $entityManager->getRepository(User::class)->findAll();
         $properties = $entityManager->getRepository(Property::class)->findAll();
 
+        $saleproperties = [];
+        $rentproperties = [];
+        $vacationalproperties = [];
+        $outstandingProperties = [];
+
+        foreach ($properties as $property) {
+            if ($property->getOperationType() === "Venta") {
+                $saleproperties[] = $property;
+            } elseif ($property->getOperationType() === "Alquiler") {
+                $rentproperties[] = $property;
+            } else {
+                $vacationalproperties[] = $property;
+            }
+
+            if ($property->isOutstanding()) {
+                $outstandingProperties[] = $property;
+            }
+
+
+        }
+
         return $this->render('home/index.html.twig', [
             'properties' => $properties,
+            'saleproperties' => $saleproperties,
+            'rentproperties' => $rentproperties,
+            'vacationalproperties' => $vacationalproperties,
+            'outstandingProperties' => $outstandingProperties,
             'controller_name' => 'HomeController',
         ]);
     }

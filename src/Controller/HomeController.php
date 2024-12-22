@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Property;
+use Symfony\Component\Finder\Finder;
 
 
 
@@ -25,19 +26,44 @@ class HomeController extends AbstractController
         $outstandingProperties = [];
 
         foreach ($properties as $property) {
-            if ($property->getOperationType() === "Venta") {
-                $saleproperties[] = $property;
-            } elseif ($property->getOperationType() === "Alquiler") {
-                $rentproperties[] = $property;
+            $imageDir = 'uploads/' . $property->getReference();
+            $finder = new Finder();
+
+            // Agregar imágenes a cada objeto property
+            if (is_dir($imageDir)) {
+                $finder->files()->in($imageDir)->name('/\\.(jpg|jpeg|png)$/i');
+                $images = [];
+
+                foreach ($finder as $file) {
+                    $images[] = $file->getRelativePathname();
+                }
+
+                $property->images = $images;
             } else {
-                $vacationalproperties[] = $property;
+                $property->images = [];
             }
 
-            if ($property->isOutstanding()) {
-                $outstandingProperties[] = $property;
+            // Filtrar por operacion y si es destacada
+            switch ($property->getOperationType()) {
+                case 'Venta':
+                    $saleproperties[] = $property;
+                    if ($property->isOutstanding()) {
+                        $outstandingProperties[] = $property;
+                    }
+                    break;
+                    case 'Alquiler':
+                        $rentproperties[] = $property;
+                        if ($property->isOutstanding()) {
+                            $outstandingProperties[] = $property;
+                        }
+                        break;
+                    case 'Alquiler vacacional':
+                        $vacationalproperties[] = $property;
+                        if ($property->isOutstanding()) {
+                            $outstandingProperties[] = $property;
+                        }
+                        break;
             }
-
-
         }
 
         return $this->render('home/index.html.twig', [

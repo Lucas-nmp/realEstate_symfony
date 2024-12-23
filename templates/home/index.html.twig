@@ -7,12 +7,22 @@
 
 <div class="container">
     <!-- DESTACADOS SLIDER -->
-    <div id="destacados" class"section">
+    <div id="destacados" class="slider-box">
         <h2>Destacados</h2>
-        {% for property in outstandingProperties %}
-            <p> {{ property.title }} </p>
-        {% endfor %}    
+        <ul>
+            {% for property in outstandingProperties %}
+                <li>
+                    {% if property.images|length > 0 %}
+                        <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
+                    {% else %}
+                        <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+        </ul>    
     </div>
+
     <!-- FIN DESTACADOS SLIDER -->
     <hr>
 

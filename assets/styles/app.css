@@ -1,17 +1,29 @@
 body {
     background-color: white;
-    color: rgb(17, 230, 31); /* Color de texto por defecto */
+    color:#44C662; /* Color de texto por defecto */
     font-family: Open sans, Arial, sans-serif;
 }
 
 h2 {
+    
     padding-top: 45px;
     text-align: center;
+    font-size: 40px;
 }
 
 h5 {
     text-align: center;
     padding-bottom: 30px;
+    color: #9a9999;
+}
+
+h3 {
+    color: #000;
+}
+
+h4 {
+    margin-top: 10px;
+    color: #484848;
 }
 
 .special {
@@ -20,10 +32,12 @@ h5 {
 
 .about {
     font-size: large;
+    padding: 10px 35px ;
+    color: #9a9999;
 }
 
 hr {
-    margin-top: 60px;
+    margin-top: 30px;
     border-color: #000;
 }
 html {
@@ -41,7 +55,7 @@ html {
 
 .slider-box {
     max-width: 1000px;
-    max-height: 700px;
+    max-height: 800px;
     width: 100%; /* Se ajusta automáticamente al ancho disponible */
     height: auto; /* Mantiene proporciones */
     margin: 50px auto; /* Centrado horizontal */
@@ -103,14 +117,27 @@ html {
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease; /* Animación suave para cambios de tamaño */
-    
+    transition: width 0.3s ease; /* Animación suave para cambios de tamaño */  
 }
+
+.price {
+    color: #44C662 !important;
+    font-size: 25px;
+}
+
+.price-remarks{
+    color: red;
+    font-size: 15px;
+}
+
 
 .product-carousel p, 
 .carousel-container p {
     text-align: left; /* Asegura que los párrafos de cada contenedor estén alineados */
+    color: #9a9999;
 }
+
+
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -145,7 +172,7 @@ html {
 }
 
 .operation p {
-    background-color: rgba(41, 234, 11, 0.5);
+    background-color: rgba(28, 159, 7, 0.5);
     color: #fff;
     border: none;
     padding: 10px;

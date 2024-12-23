@@ -26,13 +26,14 @@
 
     <hr>
 
+    <!-- TODO crear nueva entidad 'about' y formulario para añadir, modificar y eliminarlos para personalizar esta seccion -->
     <!-- SOBRE NOSOTROS -->
     <div id="sobre-nosotros" class="section">
         <h2 class="special">Sobre nosotros</h2>
         <div class="products-container">
             
                 <div class="product-carousel">
-                    <h3>Explora</h3>
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Explora</h3>
                     <div class="carousel-container">
                         <div class="about">
                             <p>Encuentra la Casa de tus Sueños en la Costa del Sol con Alejandra Home. Nos dedicamos a hacer realidad el sueño de tener un hogar en la hermosa Costa del Sol. Nuestro equipo se esfuerza por ofrecer un servicio excepcional, combinando un trato personalizado y profesional para cada cliente.</p>
@@ -41,7 +42,7 @@
                 </div>
 
                 <div class="product-carousel">
-                    <h3>Experiencia</h3>
+                    <h3><i class="fa-solid fa-medal"></i> Experiencia</h3>
                     <div class="carousel-container">
                         <div class="about">
                             <p>Nuestra Promesa de Servicio Personalizado y Profesional. En Alejandra Home, entendemos que la compra de una propiedad es más que una transacción, es una experiencia de vida. Por eso, nos comprometemos a brindar un servicio excepcional, con atención personalizada y profesional en cada paso del camino.</p>
@@ -50,7 +51,7 @@
                 </div>
 
                 <div class="product-carousel">
-                    <h3>Facilidad</h3>
+                    <h3> <i class="fa-solid fa-key"></i> Facilidad</h3>
                     <div class="carousel-container">
                         <div class="about">
                             <p>Trámites Simplificados para tu Comodidad Inmobiliaria. En Alejandra Home, nos encargamos de mucho más que solo la compra de tu propiedad. Gestionamos todos los trámites necesarios antes y después de la transacción, incluyendo verificación de cargas, tributos, comunidades, suministros, hipotecas y tramitación de escrituras, para que puedas disfrutar de tu nuevo hogar sin preocupaciones.</p>
@@ -59,7 +60,7 @@
                 </div>
 
                 <div class="product-carousel">
-                    <h3>Diversidad</h3>
+                    <h3><i class="fa-solid fa-flag"></i> Diversidad</h3>
                     <div class="carousel-container">
                         <div class="about">
                             <p>Tu Sitio Inmobiliario Multilingüe. En Alejandra Home, nos enorgullece ofrecer nuestros servicios en varios idiomas. Ya seas español, inglés, francés o ruso, nuestro equipo está aquí para ayudarte a encontrar la propiedad perfecta y facilitar el proceso de compra con fluidez y claridad en el idioma que prefieras.</p>
@@ -68,7 +69,7 @@
                 </div>
 
                 <div class="product-carousel">
-                    <h3>Confianza</h3>
+                    <h3><i class="fa-solid fa-check"></i> Confianza</h3>
                     <div class="carousel-container">
                         <div class="about">
                             <p>Descubre Opciones Variadas y Seguras. En Alejandra Home, trabajamos tanto con productos bancarios como con propiedades particulares, brindándote una amplia gama de opciones confiables para elegir. Puedes contar con nosotros para encontrar la mejor opción que se adapte a tus necesidades y preferencias, con total transparencia y confianza.</p>
@@ -88,7 +89,7 @@
         <div class="products-container">
             {% for property in saleproperties %}
                 <div class="product-carousel">
-                    <h4>{{ property.title }}</h4>
+                    
                     <div class="carousel-container">
                         <div class="main-image-container">
                             <div class="operation">
@@ -110,9 +111,10 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <hr>
+                    <h4>{{ property.title }}</h4>
+                    
                     <p> {{ property.shortdescription }} </p>
-                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks"> {{ property.priceobservation }} </span> </p> <!-- el 0 indica el numero de decimales --> 
                     <hr>
                     <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
                     
@@ -156,7 +158,7 @@
                     </div>
                     <hr>
                     <p> {{ property.shortdescription }} </p>
-                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks"> {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
                     <hr>
                     <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
                     
@@ -200,7 +202,7 @@
                     </div>
                     <hr>
                     <p> {{ property.shortdescription }} </p>
-                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks">/por semana {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
                     <hr>
                     <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
                     

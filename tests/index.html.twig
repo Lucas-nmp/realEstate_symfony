@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div id="destacados" class="slider-box">
+        <h2>Destacados</h2>
+        <ul>
+            {% for property in outstandingproperties %}
+                <li>
+                    {% if property.images|length > 0 %}
+                        <img class="main-image" src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
+                    {% else %}
+                        <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+        </ul>   
+    </div>
+
+
+    <div id="sobre-nosotros" class="section">
+        <h2>Sobre nosotros</h2>
+    </div>
+
+
+    <div id="propiedades-venta" class="section">
+        <h2>Propiedades en Venta</h2>
+        <h5>Encuentre la casa de sus sueños</h5> 
+        <div class="products-container">
+            {% for property in saleproperties %}
+                <div class="product-carousel">
+                    <h4>{{ property.title }}</h4>
+                    <div class="carousel-container">
+                        <div class="main-image-container">
+                            <div class="operation">
+                                <p> {{ property.operationtype }} </p>
+                            </div>
+                            {% if property.images|length > 0 %}
+                                <img class="main-image" src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
+                            {% else %}
+                                <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
+                            {% endif %}
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="prev-btn"><</button>
+                            <button class="next-btn">></button>
+                        </div>
+                        <div class="thumbnails-container">
+                            {% for image in property.images %}
+                                <img src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}" data-index="{{ loop.index0 }}">   
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr>
+                    <p> {{ property.shortdescription }} </p>
+                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <hr>
+                    <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
+                    
+
+                </div>    
+            {% endfor %}
+        </div>
+    </div>
+
+
+    
+    <div id="propiedades-venta" class="section">
+        <h2>Propiedades en venta</h2>
+        <h5>Encuentre la casa de sus sueños.</h5> 
+        {% for property in saleproperties %}
+            <h4>{{ property.title }}</h4>
+            {% for image in property.images %}
+                <img src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}">   
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+
+    <div id="propiedades-alquiler" class="section">
+        <h2>Propiedades en alquiler</h2>
+        <h5>Tenemos alquileres para larga temporada.</h5>
+        {% for property in rentproperties %}
+            <h4>{{ property.title }}</h4>
+            {% for image in property.images %}
+                <img src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}">   
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div id="propiedades-vacacional" class="section">
+        <h2>Propiedades en alquiler vacacional</h2>
+        <h5>Encuentre el lugar idel para disfrutar del descanso.</h5>
+        {% for property in vacationproperties %}
+            <h4>{{ property.title }}</h4>
+            {% for image in property.images %}
+                <img src="{{ asset('images/uploads/' ~ property.id ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}">   
+            {% endfor %}
+        {% endfor %}
+        
+    </div>
+</div>
+
+
+<script>
+        document.querySelectorAll('.product-carousel').forEach(carousel => {
+            const mainImage = carousel.querySelector('.main-image');
+            const thumbnails = carousel.querySelectorAll('.thumbnails-container img');
+            const prevBtn = carousel.querySelector('.prev-btn');
+            const nextBtn = carousel.querySelector('.next-btn');
+            let currentIndex = 0;
+
+            // Actualizar imagen principal y miniaturas activas
+            function updateMainImage(index) {
+                currentIndex = index;
+                mainImage.src = thumbnails[index].src;
+                thumbnails.forEach(img => img.classList.remove('active'));
+                thumbnails[index].classList.add('active');
+            }
+
+            // Eventos de clic en las miniaturas
+            thumbnails.forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', () => {
+                    updateMainImage(index);
+                });
+            });
+
+            // Botón anterior
+            prevBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+                updateMainImage(newIndex);
+            });
+
+            // Botón siguiente
+            nextBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex + 1) % thumbnails.length;
+                updateMainImage(newIndex);
+            });
+
+            // Marcar la primera miniatura como activa
+            if (thumbnails.length > 0) {
+                thumbnails[0].classList.add('active');
+            }
+        });
+    </script>
+
+    {% endblock %}

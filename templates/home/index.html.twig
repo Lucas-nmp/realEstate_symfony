@@ -8,7 +8,7 @@
 <div class="container">
     <!-- DESTACADOS SLIDER -->
     <div id="destacados" class="slider-box">
-        <h2>Destacados</h2>
+        <h2 class="special">Destacados</h2>
         <ul>
             {% for property in outstandingProperties %}
                 <li>
@@ -22,13 +22,13 @@
 
         </ul>    
     </div>
-
     <!-- FIN DESTACADOS SLIDER -->
+
     <hr>
 
     <!-- SOBRE NOSOTROS -->
     <div id="sobre-nosotros" class="section">
-        <h2>Sobre nosotros</h2>
+        <h2 class="special">Sobre nosotros</h2>
         <div class="products-container">
             
                 <div class="product-carousel">
@@ -83,24 +83,21 @@
     
     <!-- PROPIEDADES EN VENTA -->
     <div id="propiedades-venta" class="section">
-        <h2>Propiedades en venta</h2>
+        <h2>Propiedades en Venta</h2>
+        <h5>Encuentra la casa de tus sueños</h5> 
         <div class="products-container">
             {% for property in saleproperties %}
-                {% set imageDir = 'uploads/' ~ property.reference %}
-                {% set images = [] %}
-
-                {# Renderizar cada propiedad #}
                 <div class="product-carousel">
                     <h4>{{ property.title }}</h4>
                     <div class="carousel-container">
-                        <div class="operation">
-                            <p> {{ property.operationType}} </p>
-                        </div>
                         <div class="main-image-container">
-                            {% if images|length > 0 %}
-                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            <div class="operation">
+                                <p> {{ property.operationtype }} </p>
+                            </div>
+                            {% if property.images|length > 0 %}
+                                <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
                             {% else %}
-                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                                <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
                             {% endif %}
                         </div>
                         <div class="carousel-buttons">
@@ -108,20 +105,19 @@
                             <button class="next-btn">></button>
                         </div>
                         <div class="thumbnails-container">
-                            {% for image in images %}
-                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
-                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% for image in property.images %}
+                                <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}" data-index="{{ loop.index0 }}">   
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="info">
-                        <p>{{ property.shortdescription }}</p>
-                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
-                        <hr>
-                        <p>{{ property.area }}</p>
+                    <hr>
+                    <p> {{ property.shortdescription }} </p>
+                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <hr>
+                    <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
+                    
 
-                    </div>    
-                </div>
+                </div>    
             {% endfor %}
         </div>
     </div>
@@ -131,24 +127,21 @@
 
     <!-- PROPIEDADES EN ALQUILER -->
     <div id="propiedades-alquiler" class="section">
-        <h2>Propiedades en alquiler</h2>
+        <h2>Propiedades en Alquiler</h2>
+        <h5>Tenemos alquileres para larga temporada</h5> 
         <div class="products-container">
             {% for property in rentproperties %}
-                {% set imageDir = 'uploads/' ~ property.reference %}
-                {% set images = [] %}
-
-                {# Renderizar cada propiedad #}
                 <div class="product-carousel">
                     <h4>{{ property.title }}</h4>
                     <div class="carousel-container">
-                        <div class="operation">
-                            <p> {{ property.operationType}} </p>
-                        </div>
                         <div class="main-image-container">
-                            {% if images|length > 0 %}
-                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            <div class="operation">
+                                <p> {{ property.operationtype }} </p>
+                            </div>
+                            {% if property.images|length > 0 %}
+                                <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
                             {% else %}
-                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                                <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
                             {% endif %}
                         </div>
                         <div class="carousel-buttons">
@@ -156,22 +149,21 @@
                             <button class="next-btn">></button>
                         </div>
                         <div class="thumbnails-container">
-                            {% for image in images %}
-                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
-                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% for image in property.images %}
+                                <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}" data-index="{{ loop.index0 }}">   
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="info">
-                        <p>{{ property.shortdescription }}</p>
-                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
-                        <hr>
-                        <p>{{ property.area }}</p>
+                    <hr>
+                    <p> {{ property.shortdescription }} </p>
+                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <hr>
+                    <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
+                    
 
-                    </div>    
-                </div>
+                </div>    
             {% endfor %}
-        </div>   
+        </div>
     </div>
     <!-- FIN PROPIEDADES EN ALQUILER -->
 
@@ -180,23 +172,20 @@
     <!-- PROPIEDADES EN ALQUILER VACACIONAL -->
     <div id="propiedades-vacacional" class="section">
         <h2>Propiedades en alquiler vacacional</h2>
+        <h5>Encuentra la casa de tus sueños</h5> 
         <div class="products-container">
             {% for property in vacationalproperties %}
-                {% set imageDir = 'uploads/' ~ property.reference %}
-                {% set images = [] %}
-
-                {# Renderizar cada propiedad #}
                 <div class="product-carousel">
                     <h4>{{ property.title }}</h4>
                     <div class="carousel-container">
-                        <div class="operation">
-                            <p> {{ property.operationType}} </p>
-                        </div>
                         <div class="main-image-container">
-                            {% if images|length > 0 %}
-                                <img class="main-image" src="/{{ imageDir }}/{{ images[0] }}" alt="Imagen principal">
+                            <div class="operation">
+                                <p> {{ property.operationtype }} </p>
+                            </div>
+                            {% if property.images|length > 0 %}
+                                <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
                             {% else %}
-                                <img class="main-image" src="/uploads/AX191224-04/445-29.jpg" alt="Sin imágenes">
+                                <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
                             {% endif %}
                         </div>
                         <div class="carousel-buttons">
@@ -204,26 +193,76 @@
                             <button class="next-btn">></button>
                         </div>
                         <div class="thumbnails-container">
-                            {% for image in images %}
-                                <img src="/{{ imageDir }}/{{ image }}" alt="Miniatura" data-index="{{ loop.index0 }}"
-                                    class="{% if loop.index0 == 0 %}active{% endif %}">
+                            {% for image in property.images %}
+                                <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}" data-index="{{ loop.index0 }}">   
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="info">
-                        <p>{{ property.shortdescription }}</p>
-                        <p>{{ property.price }}€ {{ property.priceObservation}}</p>
-                        <hr>
-                        <p>{{ property.area }}</p>
+                    <hr>
+                    <p> {{ property.shortdescription }} </p>
+                    <p>{{ property.price|number_format(0, ',', '.') }} €</p> <!-- el 0 indica el numero de decimales --> 
+                    <hr>
+                    <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
+                    
 
-                    </div>    
-                </div>
+                </div>    
             {% endfor %}
         </div>
     </div>
     <!-- FIN PROPIEDADES EN ALQUILER VACACIONAL -->
-
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.product-carousel').forEach(carousel => {
+            const mainImage = carousel.querySelector('.main-image');
+            const thumbnails = carousel.querySelectorAll('.thumbnails-container img');
+            const prevBtn = carousel.querySelector('.prev-btn');
+            const nextBtn = carousel.querySelector('.next-btn');
+            let currentIndex = 0;
+
+            if (!mainImage || thumbnails.length === 0 || !prevBtn || !nextBtn) {
+                console.warn('Faltan elementos en el carrusel:', carousel);
+                return; // Salir si algún elemento no está presente
+            }
+
+            // Actualizar imagen principal y miniaturas activas
+            function updateMainImage(index) {
+                currentIndex = index;
+                mainImage.src = thumbnails[index].src;
+                thumbnails.forEach(img => img.classList.remove('active'));
+                thumbnails[index].classList.add('active');
+            }
+
+            // Evento de clic en miniaturas
+            thumbnails.forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', () => {
+                    updateMainImage(index);
+                });
+            });
+
+            // Botón anterior
+            prevBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+                updateMainImage(newIndex);
+            });
+
+            // Botón siguiente
+            nextBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex + 1) % thumbnails.length;
+                updateMainImage(newIndex);
+            });
+
+            // Marcar la primera miniatura como activa y establecer la imagen principal inicial
+            if (thumbnails.length > 0) {
+                thumbnails[0].classList.add('active');
+                mainImage.src = thumbnails[0].src;
+            }
+        });
+    });
+
+</script>
+
 {% endblock %}
 
 

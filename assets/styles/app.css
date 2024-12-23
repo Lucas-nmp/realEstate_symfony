@@ -4,6 +4,20 @@ body {
     font-family: Open sans, Arial, sans-serif;
 }
 
+h2 {
+    padding-top: 45px;
+    text-align: center;
+}
+
+h5 {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.special {
+    padding-bottom: 50px;
+}
+
 hr {
     margin-top: 60px;
     border-color: #000;
@@ -12,8 +26,9 @@ html {
     scroll-behavior: smooth;
 }
 .section {
-    padding: 20px; /* Espaciado interno para cada sección */
-    text-align: center;
+    max-width: 100%;
+    padding: 20px 10px; /* Espaciado interno para cada sección */
+    
 }
 
 .info {
@@ -63,11 +78,14 @@ html {
 
 
 .products-container {
+    max-width: 100%; /* Ajusta esto según lo cerca que quieras llegar a los bordes */
+    margin: 0 auto; /* Centra el contenedor */
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
+
 .product-carousel {
     width: 30%; /* Cada producto ocupa el 30% del contenedor en pantallas grandes */
     max-width: 400px;
@@ -77,6 +95,12 @@ html {
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: width 0.3s ease; /* Animación suave para cambios de tamaño */
+    
+}
+
+.product-carousel p, 
+.carousel-container p {
+    text-align: left; /* Asegura que los párrafos de cada contenedor estén alineados */
 }
 
 /* Media query para pantallas pequeñas */
@@ -101,11 +125,10 @@ html {
 
 .operation {
     position: absolute;
-    top: 17%; /* Ajustar según la ubicación deseada */
+    top: 15%; /* Ajustar según la ubicación deseada */
     
-        /* Ocupa todo el ancho del contenedor */
-    display: flex;
-    justify-content: center; /* Centra el texto */
+    text-align: left !important;
+    
     z-index: 10; /* Asegura que esté sobre la imagen */
     pointer-events: none; /* Evita interferencia con clics en la imagen */
     transform: translateY(-50%);
@@ -117,6 +140,7 @@ html {
     border: none;
     padding: 10px;
     border-radius: 4px;
+    text-align: left !important;
 }
 
 
@@ -182,11 +206,3 @@ html {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-h4 {
-    text-align: center;
-}
-
-h2 {
-    padding: 25px;
-    text-align: center;
-}

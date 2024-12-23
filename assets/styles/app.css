@@ -18,6 +18,10 @@ h5 {
     padding-bottom: 50px;
 }
 
+.about {
+    font-size: large;
+}
+
 hr {
     margin-top: 60px;
     border-color: #000;
@@ -36,10 +40,12 @@ html {
 }
 
 .slider-box {
-    width: 1000px;
-    height: 700px;
-    margin: 50px auto 0;
-    overflow: hidden;
+    max-width: 1000px;
+    max-height: 700px;
+    width: 100%; /* Se ajusta automáticamente al ancho disponible */
+    height: auto; /* Mantiene proporciones */
+    margin: 50px auto; /* Centrado horizontal */
+    overflow: hidden; /* Esconde contenido que se salga del contenedor */
 
 }
 
@@ -57,8 +63,11 @@ html {
 }
 
 .slider-box img {
-    width: 100%; /* Ajusta el ancho de las imágenes al contenedor */
-    height: auto; /* Mantiene la proporción */
+    width: 100%; /* Escala al ancho del contenedor */
+    height: auto; /* Mantiene proporciones */
+    max-width: 1000px; /* Máximo ancho permitido */
+    max-height: 700px; /* Máxima altura permitida */
+    object-fit: contain; /* Asegura que la imagen completa se muestre dentro del contenedor */
 }
 
 @keyframes slide {
@@ -88,7 +97,7 @@ html {
 
 .product-carousel {
     width: 30%; /* Cada producto ocupa el 30% del contenedor en pantallas grandes */
-    max-width: 400px;
+    max-width: 480px;
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -115,6 +124,7 @@ html {
 
     .slider-box {
         width: 100%;
+        max-height: 400px; /* Reducir el tamaño en pantallas pequeñas */
     }
 }
 
@@ -147,7 +157,7 @@ html {
 .main-image-container {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
     display: flex;
     justify-content: center;

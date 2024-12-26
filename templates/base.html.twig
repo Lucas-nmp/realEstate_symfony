@@ -59,29 +59,30 @@
                             </li>
 
                             <!-- Solo mostrar al usuario rol admin o crear 2 tipos de usuario -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Opciones Admin
-                                </a>
-                                <ul class="dropdown-menu bg-dark text-white">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Nueva propiedad</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Modificar propiedad</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Eliminar propiedad</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Nuevo usuario</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/logout">Salir</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opciones Admin
+                                    </a>
+                                    <ul class="dropdown-menu bg-dark text-white">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Nueva propiedad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Modificar propiedad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Eliminar propiedad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Nuevo usuario</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('app_logout') }}">Salir</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% endif %}
 
                         </ul>
 

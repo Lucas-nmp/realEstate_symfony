@@ -73,12 +73,164 @@
             <textarea class="form-control" id="long_description" name="long_description" rows="4" required></textarea>
         </div>
 
-        <!--
-        <div class="form-group">
-            <label for="images">Imágenes:</label>
-            <input type="file" class="form-control-file" id="images" name="images[]" multiple accept="image/*">
+        <hr>
+        <h4>Características del inmueble</h4>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="price">Habitaciones:</label>
+                <input type="number" class="form-control" id="bedrooms" name="bedrooms" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Baños:</label>
+                <input type="number" class="form-control" id="bathrooms" name="bathrooms" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Metros cuadrados:</label>
+                <input type="number" class="form-control" id="meters" name="meters" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Años antiguedad:</label>
+                <input type="number" class="form-control" id="years" name="years" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Orientación:</label>
+                <input type="text" class="form-control" id="orientation" name="orientation" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Estado de conservación:</label>
+                <input type="text" class="form-control" id="state_conservation" name="state_conservation" required>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="terrace" name="terrace">
+                        <label class="form-check-label" for="terrace">Terraza privada</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="parking" name="parking">
+                        <label class="form-check-label" for="parking">Cochera</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="air" name="air">
+                        <label class="form-check-label" for="air">Aire acondicionado</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="heating" name="heating">
+                        <label class="form-check-label" for="heating">Calefacción</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="furnished_kitchen" name="furnished_kitchen">
+                        <label class="form-check-label" for="heating">Cocina amueblada</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="storage_room" name="storage_room">
+                        <label class="form-check-label" for="heating">Trastero</label>
+                    </div>
+                </div>
+            </div>
+            
+            
         </div>
-        -->
+
+        <hr>
+        <h4>Características del Edificio</h4>
+
+        <div class="form-row">
+            
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="community_garage" name="community_garage">
+                        <label class="form-check-label" for="parking">Parking comunitario</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="pool" name="pool">
+                        <label class="form-check-label" for="air">Piscina comunitaria</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="elevator" name="elevator">
+                        <label class="form-check-label" for="air">Ascensor</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="supplies" name="supplies">
+                        <label class="form-check-label" for="air">Alta en suministros</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="garden" name="garden">
+                        <label class="form-check-label" for="heating">Zonas verdes</label>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <hr>
+        <h4>Características Extra</h4>
+        <div class="form-row">
+            
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="supplies" name="supplies">
+                        <label class="form-check-label" for="air">Alta en suministros</label>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="porter" name="porter">
+                        <label class="form-check-label" for="air">Portero</label>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+
+
+        
+
+
         <div class="form-group">
             <label for="images">Imágenes:</label>
             <div class="input-group">

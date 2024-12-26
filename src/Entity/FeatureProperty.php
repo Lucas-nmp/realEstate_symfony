@@ -20,6 +20,9 @@ class FeatureProperty
     #[ORM\JoinColumn(nullable: false)]
     private ?Property $property = null;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $quantity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class FeatureProperty
     public function setProperty(?Property $property): static
     {
         $this->property = $property;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?string
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(?string $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

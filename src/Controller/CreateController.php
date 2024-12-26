@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Property;
+use App\Entity\FeatureProperty;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
@@ -66,6 +67,19 @@ class CreateController extends AbstractController
                     }
                 }
             }
+
+            // Capturar las características de la propiedad
+            $property->getId();
+            $bedrooms = $request->request->get('bedrooms');
+            $featureProperty = new FeatureProperty();
+            $featureProperty->setProperty($property)
+                ->setName("Habitaciones")
+                ->setQuantity($bedrooms);
+
+            //Persistir las características de la propiedad
+            $entityManager->persist($featureProperty);
+            $entityManager->flush();
+
 
             // Redirigir después de guardar
             $this->addFlash('success', 'Propiedad guardada con éxito.');

@@ -67,7 +67,7 @@ class CreateController extends AbstractController
                     }
                 }
             }
-
+            /*
             // Capturar las características de la propiedad
             $property->getId();
             $bedrooms = $request->request->get('bedrooms');
@@ -79,7 +79,30 @@ class CreateController extends AbstractController
             //Persistir las características de la propiedad
             $entityManager->persist($featureProperty);
             $entityManager->flush();
+            */
 
+            $numericFeaturesProperty = [
+                'Habitaciones' => $request->request->get('bedrooms'),
+                'Baños' => $request->request->get('bathrooms'),
+                'Metros cuadrados' => $request->request->get('meters'),
+                'Años antigüedad' => $request->request->get('years'),
+                'Orientación' => $request->request->get('orientation'),
+                'Estado de conservación' => $request->request->get('state_conservation'),
+            ];
+
+            $this->saveNumericFeatures($numericFeaturesProperty, $property, $entityManager);
+    
+
+            $checkboxFeaturesProperty = [
+                'Terraza privada' => $request->request->get('terrace'),
+                'Cochera' => $request->request->get('parking'),
+                'Aire acondicionado' => $request->request->get('air'),
+                'Calefacción' => $request->request->get('heating'),
+                'Cocina amueblada' => $request->request->get('furnished_kitchen'),
+                'Trastero' => $request->request->get('storage_room'),
+            ];
+
+            $this->saveCheckFeatures($checkboxFeaturesProperty, $property, $entityManager);
 
             // Redirigir después de guardar
             $this->addFlash('success', 'Propiedad guardada con éxito.');
@@ -90,4 +113,41 @@ class CreateController extends AbstractController
             'controller_name' => 'SavePropertyController',
         ]);
     }
+
+    // Persistir características numéricas
+    public function saveNumericFeatures(array $numericFeatures, Property $property, EntityManagerInterface $entityManager): void 
+    {
+        foreach ($numericFeatures as $name => $quantity) {
+            $featureProperty = new FeatureProperty();
+            $featureProperty->setProperty($property)
+                            ->setName($name)
+                            ->setQuantity($quantity);
+    
+            $entityManager->persist($featureProperty);
+        }
+    
+        $entityManager->flush();
+    }
+
+    // Persistir características de tipo checkbox
+    public function saveCheckFeatures(
+        array $checkboxFeatures, 
+        Property $property, 
+        EntityManagerInterface $entityManager
+    ): void {
+        foreach ($checkboxFeatures as $name => $checked) {
+            if ($checked) { // Solo guardar si está marcado
+                $featureProperty = new FeatureProperty();
+                $featureProperty->setProperty($property)
+                                ->setName($name)
+                                ->setQuantity(null); // Cantidad siempre null
+    
+                $entityManager->persist($featureProperty);
+            }
+        }
+    
+        $entityManager->flush();
+    }
+    
+
 }

@@ -74,7 +74,7 @@ class ModifyController extends AbstractController
                 ->setPrice((float) $price)
                 ->setReference($reference)
                 ->setShortDescription($shortDescription)
-                ->setObservationPrice($observationPrice)
+                ->setPriceObservation($observationPrice)
                 ->setLongDescription($longDescription);
 
         $entityManager->flush();

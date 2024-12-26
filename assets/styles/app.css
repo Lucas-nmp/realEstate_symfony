@@ -4,6 +4,11 @@ body {
     font-family: Open sans, Arial, sans-serif;
 }
 
+h1 {
+    padding-top: 80px;
+    padding-bottom: 30px;
+}
+
 h2 {
     
     padding-top: 45px;

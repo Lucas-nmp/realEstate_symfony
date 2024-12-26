@@ -8,13 +8,129 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Lucas/Documents/WorkspaceSymfony/realEstate/src/Controller/DeleteController.php</code></li>
-        <li>Your template at <code>C:/Users/Lucas/Documents/WorkspaceSymfony/realEstate/templates/delete/index.html.twig</code></li>
-    </ul>
+<div class="example-wrapper">
+    <h1>Eliminar Propiedad</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <!-- Select para elegir propiedad -->
+    <div class="form-group col-md-4">
+        <label for="property_reference">Seleccione una propiedad:</label>
+        <select class="form-control" id="property_reference" onchange="loadProperty(this.value)" required>
+            <option value="">-- Seleccione una propiedad --</option>
+            {% for property in properties %}
+                <option value="{{ property.id }}">{{ property.id }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Formulario para Eliminar propiedad -->
+    <form id="property-form" style="display: none;" method="post" action="{{ path('app_delete_property') }}">
+        <input type="hidden" id="property_id" name="property_id">
+
+        <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" class="form-control" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="area">Área:</label>
+            <input type="text" id="area" name="area" class="form-control" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="reference">Referencia:</label>
+            <input type="text" id="reference" name="reference" class="form-control" required readonly>
+        </div>
+
+
+        <!-- Precio, Tipo de operación y Destacado en la misma fila -->
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="price">Precio:</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" required readonly>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="operation_type">Tipo de operación:</label>
+                <select class="form-control" id="operation_type" name="operation_type" required readonly>
+                    <option value="Venta">Venta</option>
+                    <option value="Alquiler">Alquiler</option>
+                    <option value="Alquiler Vacacional">Alquiler Vacacional</option>
+                </select>
+            </div>
+            <div class="custom-checkbox">
+                <div class="form-group col-md-4 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="outstanding" name="outstanding" readonly>
+                        <label class="form-check-label" for="outstanding">Destacado</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="observation_price">Observación en el precio (opcional):</label>
+            <input type="number" class="form-control" id="observation_price" name="observation_price" step="0.01" readonly>
+        </div>
+
+
+        <div class="form-group">
+            <label for="short_description">Descripción corta:</label>
+            <textarea id="short_description" name="short_description" class="form-control" required readonly></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="long_description">Descripción larga:</label>
+            <textarea id="long_description" name="long_description" class="form-control" required readonly></textarea>
+        </div>
+
+        <form action="{{ path('app_delete_property', ) }}" method="post";">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete_property') }}">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </form>
 </div>
+
+
+
+<script>
+    function loadProperty(propertyId) {
+        if (!propertyId) {
+            document.getElementById('property-form').style.display = 'none';
+            return;
+        }
+
+        fetch(`/property/${propertyId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Rellenar el formulario con los datos de la propiedad
+                document.getElementById('property_id').value = data.id;
+                document.getElementById('title').value = data.title || '';
+                document.getElementById('area').value = data.area || '';
+                document.getElementById('reference').value = data.reference || '';
+                document.getElementById('price').value = data.price || '';
+                document.getElementById('operation_type').value = data.operation_type;
+                document.getElementById('outstanding').checked = data.outstanding;
+                document.getElementById('observation_price').value = data.observation_price || '';
+                document.getElementById('short_description').value = data.short_description || '';
+                document.getElementById('long_description').value = data.long_description || '';
+
+                // Mostrar el formulario
+                document.getElementById('property-form').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error al cargar la propiedad:', error);
+            });
+    }
+</script>
 {% endblock %}

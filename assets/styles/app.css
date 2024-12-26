@@ -35,6 +35,11 @@ h4 {
     padding-bottom: 50px;
 }
 
+.custom-checkbox {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
 .about {
     font-size: large;
     padding: 10px 35px ;

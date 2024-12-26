@@ -79,6 +79,28 @@ class ModifyController extends AbstractController
 
         $entityManager->flush();
 
+        // Subir imágenes
+        $images = $request->files->get('images');
+        if ($images) {
+            $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $property->getReference();
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true); // Crear la carpeta si no existe
+            }
+
+            foreach ($images as $image) {
+                if ($image->isValid() && in_array($image->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
+                    try {
+                        $newFilename = uniqid() . '.' . $image->guessExtension();
+                        $image->move($uploadDir, $newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'No se pudo subir la imagen: ' . $e->getMessage());
+                    }
+                } else {
+                    $this->addFlash('error', 'Archivo no válido: ' . $image->getClientOriginalName());
+                }
+            }
+        }
+
         $this->addFlash('success', 'Propiedad modificada correctamente!');
         return $this->redirectToRoute('app_modify');
     }

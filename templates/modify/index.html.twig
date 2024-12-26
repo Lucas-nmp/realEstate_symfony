@@ -29,7 +29,7 @@
     </div>
 
     <!-- Formulario para modificar propiedad -->
-    <form id="property-form" style="display: none;" method="post" action="{{ path('app_modify_property') }}">
+    <form id="property-form" style="display: none;" method="post" action="{{ path('app_modify_property')}}" enctype="multipart/form-data">
         <input type="hidden" id="property_id" name="property_id">
 
         <div class="form-group">
@@ -88,9 +88,30 @@
             <textarea id="long_description" name="long_description" class="form-control" required></textarea>
         </div>
 
+        <div class="form-group">
+            <label for="images">Imágenes:</label>
+            <div class="input-group">
+                <label for="images" class="btn btn-primary">Subir imágenes</label>
+                <input type="file" class="form-control-file d-none" id="images" name="images[]" multiple accept="image/*">
+                <span id="file-selected" class="ml-2 text-muted">Ningún archivo seleccionado</span>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('images').addEventListener('change', function () {
+                const files = this.files;
+                const fileNames = files.length > 0 ? `${files.length} archivo(s) seleccionado(s)` : 'Ningún archivo seleccionado';
+
+                document.getElementById('file-selected').textContent = fileNames;
+            });
+        </script>
+
+        
+
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>
+
 
 
 

@@ -202,7 +202,7 @@
                     </div>
                     <hr>
                     <p> {{ property.shortdescription }} </p>
-                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks">/por semana {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
+                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € /semana  <span class="price-remarks"> {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
                     <hr>
                     <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
                     

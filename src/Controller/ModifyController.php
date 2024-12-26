@@ -59,6 +59,7 @@ class ModifyController extends AbstractController
         $price = $request->request->get('price');
         $observationPrice = $request->request->get('observation_price');
         $reference = $request->request->get('reference');
+        $operation = $request->request->get('operation_type');
         $shortDescription = $request->request->get('short_description');
         $longDescription = $request->request->get('long_description');
 
@@ -75,6 +76,8 @@ class ModifyController extends AbstractController
                 ->setReference($reference)
                 ->setShortDescription($shortDescription)
                 ->setPriceObservation($observationPrice)
+                ->setOperationType($operation)
+                ->setShortDescription($shortDescription)
                 ->setLongDescription($longDescription);
 
         $entityManager->flush();

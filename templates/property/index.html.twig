@@ -11,5 +11,41 @@
 <div class="example-wrapper">
     <hr>
     <h2> {{ property.title }} </h2>
+
+    <div class="details">
+        
+        <div class="carousel-container product-carousel"> 
+            <div class="main-image-container">
+                <div class="operation">
+                    <p> {{ property.operationtype }} </p>
+                </div>
+                {% if property.images|length > 0 %}
+                    <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
+                {% else %}
+                    <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
+                {% endif %}
+            </div>
+            <div class="carousel-buttons">
+                <button class="prev-btn"><</button>
+                <button class="next-btn">></button>
+            </div>
+            <div class="thumbnails-container">
+                {% for image in property.images %}
+                    <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" alt="Imagen de {{ property.title }}" data-index="{{ loop.index0 }}">   
+                {% endfor %}
+            </div>
+            <hr>
+            <p> {{ property.area }} </p>
+            <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks"> {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
+            <p> {{ property.longDescription }} </p>
+        </div>
+        
+    </div>
+    
+    
+    
 </div>
+
+
+
 {% endblock %}

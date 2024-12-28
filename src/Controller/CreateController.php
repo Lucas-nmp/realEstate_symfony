@@ -102,6 +102,12 @@ class CreateController extends AbstractController
                 'Calefacción' => $request->request->get('heating'),
                 'Cocina amueblada' => $request->request->get('furnished_kitchen'),
                 'Trastero' => $request->request->get('storage_room'),
+                'Jardín privado' => $request->request->get('privateGarden'),
+                'Exterior' => $request->request->get('exterior'),
+                'Amueblado' => $request->request->get('furnished'),
+                'Acceso minusválidos' => $request->request->get('access'),
+                'Acceso minusválidos' => $request->request->get('toilet'),
+
             ];
 
             $this->saveCheckFeatures($checkboxFeaturesProperty, $property, $entityManager);

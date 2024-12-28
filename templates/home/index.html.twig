@@ -6,21 +6,46 @@
 
 
 <div class="">
-    <!-- DESTACADOS SLIDER -->
-    <div id="destacados" class="slider-box">
-        <h2 class="special">Destacados</h2>
-        <ul>
-            {% for property in outstandingProperties %}
-                <li>
-                    {% if property.images|length > 0 %}
-                        <img class="main-image" src="{{ asset('uploads/' ~ property.reference ~ '/' ~ property.images[0]) }}" alt="Imagen de {{ property.title }}">
-                    {% else %}
-                        <img class="main-image" src="{{ asset('images/default-placeholder.jpg') }}" alt="Imagen no disponible">
-                    {% endif %}
-                </li>
-            {% endfor %}
 
-        </ul>    
+    <!-- DESTACADOS SLIDER -->
+    <div id="destacados" class="section">
+        <hr>
+        <h2 class="special">Destacados</h2>
+        <div class="products-container">
+            {% for property in outstandingProperties %}
+                <div class="product-carousel">
+                    
+                    <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in property.images %}
+                                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="overlay-text">{{ property.operationType}}</div>
+                                    <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" class="d-block w-100" alt="Imagen de {{ property.title }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- los botones no funcionan pasan las imágenes solas al volver no pasan, igual que con script TODO corregir
+                        <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        -->
+                    </div>
+                    <h4><a href="{{ path('property_detail', { id: property.id }) }}"> {{ property.title }} </a> </h4>
+                    
+                    <p> {{ property.shortdescription }} </p>
+                    <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks"> {{ property.priceobservation }} </span> </p> <!-- el 0 indica el numero de decimales --> 
+                    <hr>
+                    <p><i class="fa-solid fa-map-location-dot"></i> {{ property.area }}</p>
+                    
+
+                </div>    
+            {% endfor %}
+        </div>
     </div>
     <!-- FIN DESTACADOS SLIDER -->
 
@@ -94,6 +119,7 @@
                         <div class="carousel-inner">
                             {% for image in property.images %}
                                 <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="overlay-text">{{ property.operationType}}</div>
                                     <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" class="d-block w-100" alt="Imagen de {{ property.title }}">
                                 </div>
                             {% endfor %}
@@ -135,6 +161,7 @@
                         <div class="carousel-inner">
                             {% for image in property.images %}
                                 <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="overlay-text">{{ property.operationType}}</div>
                                     <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" class="d-block w-100" alt="Imagen de {{ property.title }}">
                                 </div>
                             {% endfor %}
@@ -175,6 +202,7 @@
                         <div class="carousel-inner">
                             {% for image in property.images %}
                                 <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="overlay-text">{{ property.operationType}}</div>
                                     <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" class="d-block w-100" alt="Imagen de {{ property.title }}">
                                 </div>
                             {% endfor %}

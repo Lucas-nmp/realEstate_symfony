@@ -188,6 +188,21 @@ a {
     object-fit: cover; /* Mantiene las proporciones y recorta si es necesario */
 }
 
+.carousel-item {
+    position: relative; /* Necesario para posicionar elementos hijos */
+}
+
+.overlay-text {
+    position: absolute;
+    top: 10px; /* Distancia desde la parte superior de la imagen */
+    left: 10px; /* Distancia desde la parte izquierda de la imagen */
+    background-color: rgba(97, 232, 13, 0.5); /* Fondo semitransparente */
+    color: white; /* Color del texto */
+    padding: 5px 10px; /* Espaciado interno del texto */
+    border-radius: 5px; 
+    font-size: 1.2rem; /* Tamaño del texto */
+}
+
 
 .carousel-container {
     position: relative;

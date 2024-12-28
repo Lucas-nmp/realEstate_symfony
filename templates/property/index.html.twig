@@ -14,6 +14,7 @@
         <div class="carousel-inner">
             {% for image in property.images %}
                 <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="overlay-text">{{ property.operationType}}</div>
                     <img src="{{ asset('uploads/' ~ property.reference ~ '/' ~ image) }}" class="d-block w-100" alt="Imagen de {{ property.title }}">
                 </div>
             {% endfor %}

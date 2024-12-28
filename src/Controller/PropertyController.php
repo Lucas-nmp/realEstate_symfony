@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PropertyRepository;
+use App\Repository\FeaturePropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,13 +12,16 @@ use Symfony\Component\Finder\Finder;
 class PropertyController extends AbstractController
 {
     #[Route('/propertyPage/{id}', name: 'property_detail')]
-    public function detail(int $id, PropertyRepository $propertyRepository): Response
+    public function detail(int $id, PropertyRepository $propertyRepository, FeaturePropertyRepository $featurePropertyRepository): Response
     {
         $property = $propertyRepository->find($id);
+        
 
         if (!$property) {
             throw $this->createNotFoundException("La propiedad no existe.");
         }
+
+        $featureProperties = $featurePropertyRepository->findBy(['property' => $property]);
         $reference = $property->getReference();
 
         $imageDir = 'uploads/' . $reference;
@@ -40,6 +44,7 @@ class PropertyController extends AbstractController
 
         return $this->render('property/index.html.twig', [
             'property' => $property, 
+            'featureProperties' => $featureProperties,
             
         ]);
     }

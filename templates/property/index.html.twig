@@ -32,7 +32,12 @@
     <p> {{ property.area }} </p>
     <p class="price">{{ property.price|number_format(0, ',', '.') }} € <span class="price-remarks"> {{ property.priceobservation }} </span></p> <!-- el 0 indica el numero de decimales --> 
     <p> {{ property.longDescription }} </p>
+
 </div>
+<hr>
+{% for feature in featureProperties %}
+    <p>{{ feature.name }}: {{ feature.quantity }}</p>
+{% endfor %}
 
     
     

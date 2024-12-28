@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\FeatureBuildingRepository;
+use App\Repository\FeatureExtraRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\FeaturePropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +14,10 @@ use Symfony\Component\Finder\Finder;
 class PropertyController extends AbstractController
 {
     #[Route('/propertyPage/{id}', name: 'property_detail')]
-    public function detail(int $id, PropertyRepository $propertyRepository, FeaturePropertyRepository $featurePropertyRepository): Response
+    public function detail(int $id, PropertyRepository $propertyRepository,
+     FeaturePropertyRepository $featurePropertyRepository,
+     FeatureExtraRepository $featureExtraRepository,
+     FeatureBuildingRepository $featureBuildingRepository): Response
     {
         $property = $propertyRepository->find($id);
         
@@ -22,6 +27,8 @@ class PropertyController extends AbstractController
         }
 
         $featureProperties = $featurePropertyRepository->findBy(['property' => $property]);
+        $featureExtras = $featureBuildingRepository->findBy(['property' => $property]);
+        $featureBuildings = $featureBuildingRepository->findBy(['property' => $property]);
         $reference = $property->getReference();
 
         $imageDir = 'uploads/' . $reference;
@@ -45,6 +52,8 @@ class PropertyController extends AbstractController
         return $this->render('property/index.html.twig', [
             'property' => $property, 
             'featureProperties' => $featureProperties,
+            'featureExtras' => $featureExtras, 
+            'featureBuildings' => $featureBuildings,
             
         ]);
     }

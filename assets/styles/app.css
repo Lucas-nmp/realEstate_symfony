@@ -178,6 +178,16 @@ a {
     width: 95%;          
 }
 
+.carousel-wrapper {
+    max-width: 800px; /* Ajusta este valor según lo que necesites */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-inner img {
+    height: 500px; /* Ajusta este valor para limitar la altura */
+    object-fit: cover; /* Mantiene las proporciones y recorta si es necesario */
+}
+
 
 .carousel-container {
     position: relative;

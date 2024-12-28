@@ -34,10 +34,42 @@
     <p> {{ property.longDescription }} </p>
 
 </div>
-<hr>
-{% for feature in featureProperties %}
-    <p>{{ feature.name }}: {{ feature.quantity }}</p>
-{% endfor %}
+<div class="container">
+    <hr>
+    <div class="features-container">
+        <div>
+            
+            <p>Inmueble</p>
+            <ul>
+                {% for feature in featureProperties %}
+                    {% if (feature.quantity!=null)%}
+                        <li>{{ feature.name }}: {{ feature.quantity }}</li>
+                    {% else %}
+                        <li>{{ feature.name }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <p>Edificio</p>
+            <ul>
+                {% for feature in featureBuildings %}
+                    <li>{{ feature.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <p>Extras</p>
+            <ul>
+                {% for feature in featureExtras %}
+                    <li>{{ feature.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 
     
     

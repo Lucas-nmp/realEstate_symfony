@@ -291,3 +291,31 @@ a {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+.features-container {
+    display: flex;
+    justify-content: center; /* Centra las columnas horizontalmente */
+    gap: 20px; /* Espaciado entre las columnas */
+}
+
+.features-container > div {
+    flex: 1; /* Ajusta la anchura de cada columna. Puedes cambiarlo si prefieres un ancho fijo. */
+    max-width: 300px; /* Limita el ancho máximo de las columnas */
+    padding: 10px;
+}
+
+.features-container ul {
+    list-style-type: disc; /* Puntos al inicio de cada elemento */
+    padding-left: 20px; /* Espaciado desde el borde izquierdo */
+}
+
+.features-container p {
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 10px;
+    text-align: center; /* Opcional: centra los títulos */
+}
+
+.features-container li {
+    margin-bottom: 5px; /* Espacio entre los elementos de la lista */
+    color: #484848;
+}

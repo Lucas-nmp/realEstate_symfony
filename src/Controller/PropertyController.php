@@ -26,9 +26,10 @@ class PropertyController extends AbstractController
             throw $this->createNotFoundException("La propiedad no existe.");
         }
 
-        $featureProperties = $featurePropertyRepository->findBy(['property' => $property]);
-        $featureExtras = $featureBuildingRepository->findBy(['property' => $property]);
-        $featureBuildings = $featureBuildingRepository->findBy(['property' => $property]);
+        $featuresProperty = $featurePropertyRepository->findBy(['property' => $property]);
+        $featuresExtra = $featureExtraRepository->findBy(['property' => $property]);
+        $featuresBuilding = $featureBuildingRepository->findBy(['property' => $property]);
+
         $reference = $property->getReference();
 
         $imageDir = 'uploads/' . $reference;
@@ -51,9 +52,9 @@ class PropertyController extends AbstractController
 
         return $this->render('property/index.html.twig', [
             'property' => $property, 
-            'featureProperties' => $featureProperties,
-            'featureExtras' => $featureExtras, 
-            'featureBuildings' => $featureBuildings,
+            'featureProperties' => $featuresProperty,
+            'featureExtras' => $featuresExtra, 
+            'featureBuildings' => $featuresBuilding,
             
         ]);
     }

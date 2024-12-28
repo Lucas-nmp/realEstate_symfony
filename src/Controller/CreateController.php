@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FeatureBuilding;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,6 +105,13 @@ class CreateController extends AbstractController
 
             $this->saveCheckFeatures($checkboxFeaturesProperty, $property, $entityManager);
 
+            $checkboxFeaturesBuilding = [
+                'Parking comunitario' => $request->request->get('community_garage'),
+                'Piscina comunitaria' => $request->request->get('pool')
+            ];
+
+            $this->saveCheckFeaturesBuilding($checkboxFeaturesBuilding, $property, $entityManager);
+
             // Redirigir después de guardar
             $this->addFlash('success', 'Propiedad guardada con éxito.');
             return $this->redirectToRoute('app_create');
@@ -148,6 +156,25 @@ class CreateController extends AbstractController
     
         $entityManager->flush();
     }
+
+    public function saveCheckFeaturesBuilding(
+        array $checkboxFeatures, 
+        Property $property, 
+        EntityManagerInterface $entityManager
+    ): void {
+        foreach ($checkboxFeatures as $name => $checked) {
+            if ($checked) { // Solo guardar si está marcado
+                $featureProperty = new FeatureBuilding();
+                $featureProperty->setProperty($property)
+                                ->setName($name);
+                                
+                $entityManager->persist($featureProperty);
+            }
+        }
+    
+        $entityManager->flush();
+    }
+
     
 
 }

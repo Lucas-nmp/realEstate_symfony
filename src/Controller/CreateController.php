@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FeatureBuilding;
+use App\Entity\FeatureExtra;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,10 +108,23 @@ class CreateController extends AbstractController
 
             $checkboxFeaturesBuilding = [
                 'Parking comunitario' => $request->request->get('community_garage'),
-                'Piscina comunitaria' => $request->request->get('pool')
+                'Piscina comunitaria' => $request->request->get('pool'),
+                'Zonas Verdes' => $request->request->get('garden'),
+                'Ascensor' => $request->request->get('elevator')
+                
             ];
 
             $this->saveCheckFeaturesBuilding($checkboxFeaturesBuilding, $property, $entityManager);
+
+            $checkboxFeaturesExtra = [
+                'Portero' => $request->request->get('porter'),
+                'Alta en suministros realizada' => $request->request->get('supplies'),
+                'Admite mascotas' => $request->request->get('pets'),
+                'Piscina privada' => $request->request->get('privatePool'),
+                'Alarma' => $request->request->get('alarm'),
+            ];
+
+            $this->saveCheckFeaturesExtra($checkboxFeaturesExtra, $property, $entityManager);
 
             // Redirigir después de guardar
             $this->addFlash('success', 'Propiedad guardada con éxito.');
@@ -176,5 +190,21 @@ class CreateController extends AbstractController
     }
 
     
-
+    public function saveCheckFeaturesExtra(
+        array $checkboxFeatures, 
+        Property $property, 
+        EntityManagerInterface $entityManager
+    ): void {
+        foreach ($checkboxFeatures as $name => $checked) {
+            if ($checked) { // Solo guardar si está marcado
+                $featureProperty = new FeatureExtra();
+                $featureProperty->setProperty($property)
+                                ->setName($name);
+                                
+                $entityManager->persist($featureProperty);
+            }
+        }
+    
+        $entityManager->flush();
+    }
 }

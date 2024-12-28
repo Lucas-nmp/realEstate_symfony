@@ -181,6 +181,7 @@ a {
 .carousel-wrapper {
     max-width: 800px; /* Ajusta este valor según lo que necesites */
     margin: 0 auto; /* Centra el carrusel horizontalmente */
+    color: #9a9999;
 }
 
 .carousel-inner img {
@@ -317,5 +318,5 @@ a {
 
 .features-container li {
     margin-bottom: 5px; /* Espacio entre los elementos de la lista */
-    color: #484848;
+    color: #9a9999;
 }

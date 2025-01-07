@@ -57,7 +57,7 @@ class HomeController extends AbstractController
                             $outstandingProperties[] = $property;
                         }
                         break;
-                    case 'Alquiler vacacional':
+                    case 'Alquiler Vacacional':
                         $vacationalproperties[] = $property;
                         if ($property->isOutstanding()) {
                             $outstandingProperties[] = $property;
